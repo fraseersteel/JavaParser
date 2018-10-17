@@ -13,22 +13,35 @@ public class LongParameterList {
     public void run(File file) throws Exception {
 
         CompilationUnit cu = JavaParser.parse(file);
-        ParameterVisitor pm = new ParameterVisitor();
-        cu.accept(pm,null);
-        if(pm.maxParam==true){
-            System.out.println("Error: "  + "too many parameters");
+        MethodVisitor mv = new MethodVisitor();
+        cu.accept(mv, null);
+        if (mv.maxParam == true) {
+            System.out.println("Error: " + "too many parameters in method " + mv.toString());
         }
     }
 
-
     private static class MethodVisitor extends VoidVisitorAdapter {
+
+        int count = 0;
+        int maxParameters = 5;
+        boolean maxParam = false;
 
         @Override
         public void visit(MethodDeclaration n, Object arg) {
             System.out.println("Method name: " + n.getName());
             // Call accept on the instance of the method body and pass it the visitor
             // defined in the class below (which doesn't otherwise get called)
-           n.getBody().get().accept(new ParameterVisitor(),null);
+            ParameterVisitor pm = new ParameterVisitor();
+            if(count>maxParameters){
+                n.getBody().get().accept(pm, null);
+                count++;
+            }else{
+                maxParam = true;
+            }
+        }
+
+        public int getCount() {
+            return count;
         }
     }
 
@@ -40,17 +53,9 @@ public class LongParameterList {
 
         @Override
         public void visit(Parameter p, Void arg) {
-            if(count<maxParameters) {
-                System.out.println("parameter name: " + p.getName());
-                super.visit(p, arg);
-                count++;
-            }else{
-                maxParam = true;
-            }
-        }
+            System.out.println("parameter name: " + p.getName());
+            super.visit(p, arg);
 
-        public int getCount() {
-            return count;
         }
     }
 }

@@ -1,6 +1,7 @@
 
 package javaParser;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 import com.github.javaparser.JavaParser;
@@ -16,19 +17,16 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class LargeClass {
 
-    public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("src/TestFolder/SimpleTests/SimpleClass.java");
+    public void run(File file) throws Exception {
 
-        CompilationUnit cu;
-        try {
-            cu = JavaParser.parse(in);
-        } finally {
-            in.close();
-        }
-        new VariableDeclaratorVisitor().visit(cu, null);
-        new AssignVisitor().visit(cu, null);
-        new ControlStatementVisitor().visit(cu, null);
+        CompilationUnit cu = JavaParser.parse(file);
+        AssignVisitor av = new AssignVisitor();
+        VariableDeclaratorVisitor vd = new VariableDeclaratorVisitor();
+        ControlStatementVisitor csv = new ControlStatementVisitor();
 
+        cu.accept(av,null);
+        cu.accept(vd,null);
+        cu.accept(csv,null);
     }
 
     /**
