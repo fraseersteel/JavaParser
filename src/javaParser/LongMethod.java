@@ -32,7 +32,7 @@ public class LongMethod {
             Optional<BlockStmt> block = m.getBody();
             NodeList<Statement> statements = block.get().getStatements();
 
-            System.out.println("no. of statements " + statements.size());
+            System.out.println("no. of statements in " + m.getName() + " "  + statements.size());
 
             if (statements.size() > 10) {
                 System.out.println("Error with [" + m.getName() + "] " + "more than 10 statements");

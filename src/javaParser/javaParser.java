@@ -1,6 +1,10 @@
 package javaParser;
 
+import sun.nio.ch.sctp.SctpNet;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -24,18 +28,17 @@ public class javaParser {
 
         while (choice != 9) {
 
-            System.out.println("Repeat list of options - 5");
+
+            File dir = new File("src/TestFolder/SimpleTests");
+            System.out.println("Folder under investigation is " + dir.toString());
+            System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");
-
-
-            File dir = new File("src/TestFolder/Abusers");
+            System.out.println();
+            choice = scanner.nextInt();
             File[] directoryListing = dir.listFiles();
             if (directoryListing != null) {
                 for (File child : directoryListing) {
-                    if(child.isDirectory()){
-                        System.out.println();
-                        System.out.println();
-                        System.out.println("continuing");
+                    if (child.isDirectory()) {
                         continue;
                     }
                     try {
@@ -43,18 +46,17 @@ public class javaParser {
 //                    System.out.println(child.getName());
 
 
-                        choice = scanner.nextInt();
                         switch (choice) {
                             case 1:
-                                System.out.println("Testing for Large parameter list.");
+                                System.out.println("Testing for Large parameter list in class - " + child.getName());
                                 lpl.run(child);
                                 break;
                             case 2:
-                                System.out.println("Testing for Large method.");
+                                System.out.println("Testing for Large method." + child.getName());
                                 lm.run(child);
                                 break;
                             case 3:
-                                System.out.println("Testing for Large class");
+                                System.out.println("Testing for Large class - " + child.getName());
                                 lc.run(child);
                                 break;
                             case 4:
@@ -79,6 +81,8 @@ public class javaParser {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    System.out.println();
                 }
             }
 
@@ -99,5 +103,35 @@ public class javaParser {
         System.out.println();
 
     }
+
+//    private static File chooseDirectory(File file) {
+//
+//        Scanner scanner = new Scanner(System.in);
+//        int choice = -1;
+//
+//        ArrayList<File> files = new ArrayList<File>(Arrays.asList(file.listFiles()));
+//
+//        while (choice != 9) {
+//
+//            choice = scanner.nextInt();
+//            if(choice==9){
+//                break;
+//            }
+//            System.out.println("choose which directory to work with: ");
+//            for (int i = 1; i > files.size(); i++) {
+//                if(file.isDirectory()) {
+//                    if (file.isDirectory()) {
+//                        System.out.println(i + " " + file.listFiles());
+//                    }
+//                }else{
+//
+//                }
+//            }
+//        }
+//
+//        return files.get(choice);
+//
+//    }
+
 }
 
