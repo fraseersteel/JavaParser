@@ -1,7 +1,5 @@
 package TestFolder.SimpleTests;
 
-
-
 public class SimpleClass
 {
 
@@ -19,6 +17,13 @@ public class SimpleClass
         int a = 0;
         i = 10;
         i = 12;
+        a = i;
+        i = a;
+        a = i;
+        i = a;
+        a = i;
+        a = i;
+        i = a;
         a = i;
         printOne(1,2,5,7,4,2);
 
