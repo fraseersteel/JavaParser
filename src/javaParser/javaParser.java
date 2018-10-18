@@ -17,6 +17,7 @@ public class javaParser {
         LongParameterList lpl = new LongParameterList();
         LongMethod lm = new LongMethod();
         LargeClass lc = new LargeClass();
+        PrimitiveObession po = new PrimitiveObession();
         MiddleMan mm = new MiddleMan();
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
@@ -27,10 +28,16 @@ public class javaParser {
             System.out.print("Enter choice : ");
 
 
-            File dir = new File("src/TestFolder/SimpleTests");
+            File dir = new File("src/TestFolder/Abusers");
             File[] directoryListing = dir.listFiles();
             if (directoryListing != null) {
                 for (File child : directoryListing) {
+                    if(child.isDirectory()){
+                        System.out.println();
+                        System.out.println();
+                        System.out.println("continuing");
+                        continue;
+                    }
                     try {
 
 //                    System.out.println(child.getName());
@@ -50,12 +57,15 @@ public class javaParser {
                                 System.out.println("Testing for Large class");
                                 lc.run(child);
                                 break;
-
                             case 4:
                                 System.out.println("Testing for Middle man");
-
+                                mm.run(child);
                                 break;
-                            case 5:
+                            case 6:
+                                System.out.println("Testing for Lazy Class");
+                                po.run(child);
+                                break;
+                            case 8:
                                 displayMenu();
                                 break;
                             case 9:
@@ -64,8 +74,6 @@ public class javaParser {
                             default:
                                 System.out.println("Unexpected input: please try again.");
                         }
-
-
 
 
                     } catch (Exception e) {
