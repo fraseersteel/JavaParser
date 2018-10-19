@@ -28,8 +28,7 @@ public class javaParser {
 
         while (choice != 9) {
 
-
-            File dir = new File("src/TestFolder/Bloaters");
+            File dir = new File("src/TestFolder/SimpleTest");
             System.out.println("Folder under investigation is " + dir.toString());
             System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");
@@ -42,9 +41,7 @@ public class javaParser {
                         continue;
                     }
                     try {
-
 //                    System.out.println(child.getName());
-
 
                         switch (choice) {
                             case 1:
@@ -64,7 +61,7 @@ public class javaParser {
                                 mm.run(child);
                                 break;
                             case 6:
-                                System.out.println("Testing for Lazy Class");
+                                System.out.println("Testing for Primitive Obession");
                                 po.run(child);
                                 break;
                             case 8:
@@ -99,6 +96,7 @@ public class javaParser {
         System.out.println("1 - Testing for large Parameter list.");
         System.out.println("2 - Testing for large method.");
         System.out.println("3 - Testing for large class.");
+        System.out.println("6 - Testing for Primitve Obession");
         System.out.println("9 - Exit");
         System.out.println();
 

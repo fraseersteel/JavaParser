@@ -2,6 +2,7 @@ package javaParser;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
@@ -26,9 +27,16 @@ public class LargeClass {
     }
 
 
+
     private static class LargeClassStatments extends VoidVisitorAdapter {
 
         int count = 0;
+
+//        public void visit(IfStmt ifSmt, Object arg){
+//
+//            ifSmt.get
+//        }
+
 
         public void visit(ClassOrInterfaceDeclaration c, Object arg) {
             count = count + c.getFields().size();
@@ -36,39 +44,47 @@ public class LargeClass {
             System.out.println("number of fields " + c.getFields().size());
             System.out.println("number of constructors " + c.getConstructors().size());
 
-            for (MethodDeclaration m : c.getMethods()) {
-                Optional<BlockStmt> block = m.getBody();
-                NodeList<Statement> statements = block.get().getStatements();
-                count = count + statements.size();
-                
+            //method statements
+            for (MethodDeclaration method : c.getMethods()) {
+                Optional<BlockStmt> mBlock = method.getBody();
+                NodeList<Statement> methStatements = mBlock.get().getStatements();
+                count = count + methStatements.size();
 
-            for(ConstructorDeclaration con : c.getConstructors()){
+            }
+
+            //constructors
+            for (ConstructorDeclaration con : c.getConstructors()) {
                 BlockStmt conBlock = con.getBody();
                 NodeList<Statement> conStatements = conBlock.getStatements();
-                count = count + statements.size();
+                count = count + conStatements.size();
             }
-
-//            for(IfStmt ifStmt : c.){
-//                Optional<BlockStmt> block = m.getBody();
-//                NodeList<Statement> statements = block.get().getC
-//            }
-
-                System.out.println("count " + count);
-
-
-            }
-
 
         }
 
-        public int getCount(){
+        void process(Node node) {
+            for (IfStmt child : node.getChildNodesByType(IfStmt.class)) {
+                count++;
+
+                visit(child, null);
+                if (child.getElseStmt().isPresent()) {
+                    if (child.getElseStmt().get() instanceof IfStmt) {
+                    } else {
+                        count++;
+                        visit(child, null);
+                    }
+                }
+            }
+        }
+
+
+        public int getCount() {
             return count;
         }
 
-        public boolean isAcceptable(){
-            if(getCount()<100){
+        public boolean isAcceptable() {
+            if (getCount() < 100) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
