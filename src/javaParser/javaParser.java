@@ -29,7 +29,7 @@ public class javaParser {
         while (choice != 9) {
 
 
-            File dir = new File("src/TestFolder/SimpleTests");
+            File dir = new File("src/TestFolder/Bloaters");
             System.out.println("Folder under investigation is " + dir.toString());
             System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");

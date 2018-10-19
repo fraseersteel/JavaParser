@@ -12,6 +12,7 @@ import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class LargeClass {
@@ -41,15 +42,13 @@ public class LargeClass {
                 count = count + statements.size();
                 
 
-//            for(ConstructorDeclaration con : c.getConstructors()){
-//                BlockStmt block = con.getBody();
-//                NodeList<Statement> statements = block.getStatements();
-//                count = count + statements.size();
-//            }
-//
+            for(ConstructorDeclaration con : c.getConstructors()){
+                BlockStmt conBlock = con.getBody();
+                NodeList<Statement> conStatements = conBlock.getStatements();
+                count = count + statements.size();
+            }
 
-
-//            for(IfStmt m : c.get){
+//            for(IfStmt ifStmt : c.){
 //                Optional<BlockStmt> block = m.getBody();
 //                NodeList<Statement> statements = block.get().getC
 //            }
@@ -60,6 +59,18 @@ public class LargeClass {
             }
 
 
+        }
+
+        public int getCount(){
+            return count;
+        }
+
+        public boolean isAcceptable(){
+            if(getCount()<100){
+                return true;
+            }else{
+                return false;
+            }
         }
 
 
