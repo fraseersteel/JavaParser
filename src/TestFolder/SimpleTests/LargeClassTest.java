@@ -1,6 +1,6 @@
 package TestFolder.SimpleTests;
 
-public class ThirdTest {
+public class LargeClassTest {
 
     int x = 0;
 

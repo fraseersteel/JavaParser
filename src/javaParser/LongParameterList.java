@@ -29,7 +29,7 @@ public class LongParameterList {
                 System.out.println("Error: too many parameters in " + m.getName());
             }
             else{
-                System.out.println("Pass: " + m.getName());
+                System.out.println("Pass for parameter list: " + m.getName());
             }
         }
     }

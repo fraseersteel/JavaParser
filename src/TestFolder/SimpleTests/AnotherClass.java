@@ -23,10 +23,168 @@ public class AnotherClass {
             int t = 12;
             int r = 12;
         }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+
+        if(a>1232){
+            int t = 12;
+            int r = 12;
+        }
+        a = i;
+        a = i*a;
+
+        if(y>12021){
+            a = 12;
+        }else{
+            a = 24;
+        }
+        a=2;
         return a;
     }
 
     public void test(){
         System.out.println(helloWorld());
+        helloWorld();
+        System.out.println("Hello world");
+        if(true){
+            int a = 1;
+        }
     }
 }

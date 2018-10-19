@@ -28,7 +28,9 @@ public class javaParser {
 
         while (choice != 9) {
 
-            File dir = new File("src/TestFolder/SimpleTest");
+            //**** change file path to chose which directory you would like to work in ****//
+
+            File dir = new File("src/TestFolder/SimpleTests");
             System.out.println("Folder under investigation is " + dir.toString());
             System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");
@@ -38,6 +40,7 @@ public class javaParser {
             if (directoryListing != null) {
                 for (File child : directoryListing) {
                     if (child.isDirectory()) {
+                        System.out.println("file is directory. Looking at next file");
                         continue;
                     }
                     try {

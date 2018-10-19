@@ -21,21 +21,22 @@ public class LargeClass {
     public void run(File file) throws Exception {
 
         CompilationUnit cu = JavaParser.parse(file);
-        LargeClassStatments lcs = new LargeClassStatments();
+        LargeClassStatements lcs = new LargeClassStatements();
 
         cu.accept(lcs, null);
+        System.out.println(lcs.getCount() + " statements ");
+        if(lcs.isAcceptable()==false){
+            System.out.println("FAIL - Too many statements in class" + file.getName());
+        }else{
+            System.out.println("PASS");
+        }
     }
 
 
 
-    private static class LargeClassStatments extends VoidVisitorAdapter {
+    private static class LargeClassStatements extends VoidVisitorAdapter {
 
         int count = 0;
-
-//        public void visit(IfStmt ifSmt, Object arg){
-//
-//            ifSmt.get
-//        }
 
 
         public void visit(ClassOrInterfaceDeclaration c, Object arg) {
@@ -59,10 +60,8 @@ public class LargeClass {
                 count = count + conStatements.size();
             }
 
-        }
 
-        void process(Node node) {
-            for (IfStmt child : node.getChildNodesByType(IfStmt.class)) {
+            for(IfStmt child : c.getParentNodeForChildren().getChildNodesByType((IfStmt.class)) ) {
                 count++;
 
                 visit(child, null);
@@ -77,15 +76,17 @@ public class LargeClass {
         }
 
 
+
+
         public int getCount() {
             return count;
         }
 
         public boolean isAcceptable() {
-            if (getCount() < 100) {
-                return true;
-            } else {
+            if (getCount()>= 20) {
                 return false;
+            } else {
+                return true;
             }
         }
 
