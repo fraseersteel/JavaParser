@@ -47,7 +47,7 @@ public class LargeClass {
             for (MethodDeclaration method : c.getMethods()) {
                 Optional<BlockStmt> mBlock = method.getBody();
                 NodeList<Statement> methStatements = mBlock.get().getStatements();
-                System.out.println(methStatements);
+//                System.out.println(methStatements);
                 count = count + methStatements.size();
 
             }
@@ -56,7 +56,7 @@ public class LargeClass {
             for (ConstructorDeclaration con : c.getConstructors()) {
                 BlockStmt conBlock = con.getBody();
                 NodeList<Statement> conStatements = conBlock.getStatements();
-                count = count + conStatements.size();
+                count+= conStatements.size();
             }
 
 

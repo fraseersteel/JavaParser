@@ -23,6 +23,7 @@ public class javaParser {
         LargeClass lc = new LargeClass();
         PrimitiveObession po = new PrimitiveObession();
         MiddleMan mm = new MiddleMan();
+        DataClass dc = new DataClass();
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
 
@@ -30,7 +31,7 @@ public class javaParser {
 
             //**** change file path to chose which directory you would like to work in ****//
 
-            File dir = new File("/Users/aaa/Documents/Uni/4th year/CS409/cs409-courseworkFinal/src/TestFolder/Abusers/Switch");
+            File dir = new File("/home/cwb15142/Documents/4th year/src/TestFolder/Couplers/FeatureEnvy");
             System.out.println("Folder under investigation is " + dir.toString());
             System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");
@@ -67,6 +68,10 @@ public class javaParser {
                                 System.out.println("Testing for Primitive Obession");
                                 po.run(child);
                                 break;
+                            case 7:
+                                System.out.println("Testing for Data Class");
+                                dc.run(child);
+                                break;
                             case 8:
                                 displayMenu();
                                 break;
@@ -99,6 +104,7 @@ public class javaParser {
         System.out.println("1 - Testing for large Parameter list.");
         System.out.println("2 - Testing for large method.");
         System.out.println("3 - Testing for large class.");
+        System.out.println("7 - Testing for Data class.");
         System.out.println("6 - Testing for Primitve Obession");
         System.out.println("9 - Exit");
         System.out.println();
