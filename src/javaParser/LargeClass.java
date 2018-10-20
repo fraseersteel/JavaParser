@@ -7,9 +7,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.IfStmt;
-import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.File;
@@ -49,6 +47,7 @@ public class LargeClass {
             for (MethodDeclaration method : c.getMethods()) {
                 Optional<BlockStmt> mBlock = method.getBody();
                 NodeList<Statement> methStatements = mBlock.get().getStatements();
+                System.out.println(methStatements);
                 count = count + methStatements.size();
 
             }
@@ -73,9 +72,20 @@ public class LargeClass {
                     }
                 }
             }
+
+//            for(ForStmt child : c.getMethodsByName())
+
+
+            for(WhileStmt child : c.getParentNodeForChildren().getChildNodesByType(WhileStmt.class)){
+                System.out.println(child.getCondition() + " condition");
+                ArrayList<Statement> methStatements = new ArrayList<>();
+                methStatements.add(child.getBody());
+                count = count + methStatements.size();
+                count++;
+            }
+
+
         }
-
-
 
 
         public int getCount() {

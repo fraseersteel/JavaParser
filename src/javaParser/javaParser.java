@@ -30,7 +30,7 @@ public class javaParser {
 
             //**** change file path to chose which directory you would like to work in ****//
 
-            File dir = new File("src/TestFolder/SimpleTests");
+            File dir = new File("/Users/aaa/Documents/Uni/4th year/CS409/cs409-courseworkFinal/src/TestFolder/Abusers/Switch");
             System.out.println("Folder under investigation is " + dir.toString());
             System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");
