@@ -3,6 +3,17 @@ package TestFolder.SimpleTests;
 public class SimpleClass
 {
 
+    public SimpleClass(){
+        int a = 3;
+        int b =5;
+
+        for(int i = 0;i<5;i++){
+            b = 2;
+            int y =2;
+            String hello = "hello";
+        }
+}
+
     public static void main(String[] args) {
         printOne(1,2,5,2,6,7);
         printTwo();

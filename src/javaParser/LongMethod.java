@@ -22,21 +22,28 @@ public class LongMethod {
         MethodDeclarationVisitor md = new MethodDeclarationVisitor();
         cu.accept(md, null);
 
+        if(md.getPassOrFail()==false){
+            System.out.println("All methods passed");
+        }
 
     }
 
 
     private static class MethodDeclarationVisitor extends VoidVisitorAdapter {
+
+        boolean fail = false;
         public void visit(MethodDeclaration m, Object arg) {
 
             Optional<BlockStmt> block = m.getBody();
             NodeList<Statement> statements = block.get().getStatements();
-
-            System.out.println("no. of statements in " + m.getName() + " "  + statements.size());
-
             if (statements.size() > 10) {
                 System.out.println("Error with [" + m.getName() + "] " + "more than 10 statements");
+                fail = true;
             }
+        }
+
+        boolean getPassOrFail(){
+            return fail;
         }
 
     }
