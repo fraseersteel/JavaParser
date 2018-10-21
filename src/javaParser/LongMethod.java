@@ -9,6 +9,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
@@ -36,6 +37,12 @@ public class LongMethod {
 
             Optional<BlockStmt> block = m.getBody();
             NodeList<Statement> statements = block.get().getStatements();
+
+            for(IfStmt child : m.getParentNodeForChildren().getChildNodesByType(IfStmt.class)){
+                statements.add(child);
+                System.out.println();
+            }
+
             if (statements.size() > 10) {
                 System.out.println("Error with [" + m.getName() + "] " + "more than 10 statements");
                 fail = true;

@@ -3,6 +3,16 @@ package TestFolder.SimpleTests;
 public class AnotherClass {
 
     int u = 10;
+    int y = 10;
+    int p = 10;
+    int q = 10;
+    int ab = 10;
+    int bb = 10;
+    int ads = 10;
+    int adfad = 10;
+    int a121 = 10;
+    Object a;
+    Object b;
 
     public int helloWorld(){
 

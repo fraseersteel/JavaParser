@@ -31,7 +31,7 @@ public class javaParser {
 
             //**** change file path to chose which directory you would like to work in ****//
 
-            File dir = new File("/home/cwb15142/Documents/4th year/src/TestFolder/Couplers/FeatureEnvy");
+            File dir = new File("/home/cwb15142/Documents/4th year/src/TestFolder/SimpleTests");
             System.out.println("Folder under investigation is " + dir.toString());
             System.out.println("Repeat list of options - 8");
             System.out.print("Enter choice : ");
@@ -53,7 +53,7 @@ public class javaParser {
                                 lpl.run(child);
                                 break;
                             case 2:
-                                System.out.println("Testing for Large method." + child.getName());
+                                System.out.println("Testing for Long method -" + child.getName());
                                 lm.run(child);
                                 break;
                             case 3:
@@ -61,15 +61,11 @@ public class javaParser {
                                 lc.run(child);
                                 break;
                             case 4:
-                                System.out.println("Testing for Middle man");
-                                mm.run(child);
-                                break;
-                            case 6:
-                                System.out.println("Testing for Primitive Obession");
+                                System.out.println("Testing for Primitive Obession -" + child.getName());
                                 po.run(child);
                                 break;
-                            case 7:
-                                System.out.println("Testing for Data Class");
+                            case 5:
+                                System.out.println("Testing for Data Class -" + child.getName());
                                 dc.run(child);
                                 break;
                             case 8:
@@ -102,10 +98,10 @@ public class javaParser {
         System.out.println("Choose which code smell you would like to test for");
         System.out.println();
         System.out.println("1 - Testing for large Parameter list.");
-        System.out.println("2 - Testing for large method.");
+        System.out.println("2 - Testing for long method.");
         System.out.println("3 - Testing for large class.");
-        System.out.println("7 - Testing for Data class.");
-        System.out.println("6 - Testing for Primitve Obession");
+        System.out.println("4 - Testing for Primitve Obession");
+        System.out.println("5 - Testing for Data class.");
         System.out.println("9 - Exit");
         System.out.println();
 

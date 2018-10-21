@@ -23,10 +23,9 @@ public class LongParameterList {
 
         public void visit(MethodDeclaration m, Object arg) {
 
-
             int i = m.getParameters().size();
             if (i < maxParameterSize) {
-                System.out.println("Error: too many parameters in " + m.getName());
+                System.out.println("Fail: too many parameters in " + m.getName());
             }
             else{
                 System.out.println("Pass for parameter list: " + m.getName());
