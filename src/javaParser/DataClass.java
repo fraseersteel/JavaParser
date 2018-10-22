@@ -33,7 +33,6 @@ public class DataClass {
                 for (MethodDeclaration method : c.getMethods()) {
                     Optional<BlockStmt> mBlock = method.getBody();
                     NodeList<Statement> methStatements = mBlock.get().getStatements();
-                    System.out.println(methStatements.size());
                     if (methStatements.size() < 3) {
                         dataClass = true;
                     } else{
@@ -42,16 +41,16 @@ public class DataClass {
 
                     List<MethodDeclaration> methods = c.getMethods();
 
-//                    for (MethodDeclaration m : methods) {
-//
-////                        String prefix = m.getNameAsString().substring(0, 3);
-////                        if (!prefix.contains("get") || !prefix.contains("set") || !prefix.contains("to") || !prefix.contains("is")) {
-////                            dataClass = false;
-////                        } else {
-////                            dataClass = true;
-////                        }
-////                    }
-//
+                    for (MethodDeclaration m : methods) {
+
+                        String prefix = m.getNameAsString().substring(0, 3);
+                        if (!prefix.contains("get") || !prefix.contains("set") || !prefix.contains("to") || !prefix.contains("is")) {
+                            dataClass = false;
+                        } else {
+                            dataClass = true;
+                        }
+                    }
+
                 }
 
 

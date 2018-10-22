@@ -32,11 +32,35 @@ public class PrimitiveObssession2 {
 
         public void visit(ClassOrInterfaceDeclaration c,  Void arg){
 
+            for(FieldDeclaration f : c.getFields()){
+                if(f.getElementType().isPrimitiveType()){
+                    if(!primitiveVarName.contains(f)){
+                        primitiveVarName.add(f.toString());
+                        primitiveCount++;
+                        variableCount++;
+                    } else{
+                        System.out.println("already contains -- " + f);
+                    }
+                }else{
+                    variableCount++;
+                }
+            }
         }
 
-        public float calPrimPercentage(){
-
-            return 0;
+        private void calPrimPercentage() {
+            System.out.println("calculating");
+            if (primitiveCount < 0) {
+                System.out.println("calculating percentage");
+                float primPercentage = primitiveCount * 100 / variableCount;
+                if (primPercentage <= 70) {
+                    System.out.println("Fail - Focuses on too many primitives");
+                } else {
+                    System.out.println("Pass");
+                }
+            }else{
+                System.out.println("no primitives");
+                System.out.println(variableCount + " variable count");
+            }
         }
     }
 }

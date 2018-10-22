@@ -1,4 +1,4 @@
-package TestFolder.Abusers.Switch;
+package TestFolder.Abusers;
 // From https://rosettacode.org/wiki/Morpion_solitaire/Java
 // Large class and also contains data/lazy classes and long methods
 // and checkline has a long parameter list!

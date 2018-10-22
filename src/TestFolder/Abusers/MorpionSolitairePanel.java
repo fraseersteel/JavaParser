@@ -1,7 +1,9 @@
-package TestFolder.Abusers.Switch;
+package TestFolder.Abusers;
 // From https://rosettacode.org/wiki/Morpion_solitaire/Java
 // Switching on an enum
 // also a couple of long methods
+
+import TestFolder.Abusers.Grid;
 
 import java.awt.*;
 import java.awt.event.*;

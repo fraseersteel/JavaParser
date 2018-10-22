@@ -1,6 +1,8 @@
-package TestFolder.Abusers.Switch;
+package TestFolder.Abusers;
 // From https://rosettacode.org/wiki/Morpion_solitaire/Java
 // Nothing in here
+
+import TestFolder.Abusers.MorpionSolitairePanel;
 
 import java.awt.*;
 import javax.swing.*;

@@ -18,12 +18,13 @@ public class JavaParser {
         LongMethod lm = new LongMethod();
         LargeClass lc = new LargeClass();
         PrimitiveObsession po = new PrimitiveObsession();
+        PrimitiveObssession2 pO2 = new PrimitiveObssession2();
         DataClass dc = new DataClass();
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
 
         //**** change file path to chose which directory you would like to work in ****//
-        File dir = new File("src/TestFolder/Bloaters");
+        File dir = new File("src/TestFolder/Dispensibles");
         if (dir.isDirectory()) {
         while (choice != 9) {
 
@@ -41,6 +42,8 @@ public class JavaParser {
                         }
                         try {
 
+                            System.out.println("---------------------------------------------------------------");
+
                             switch (choice) {
                                 case 1:
                                     System.out.println("Testing for Large parameter list in class - " + child.getName());
@@ -56,7 +59,7 @@ public class JavaParser {
                                     break;
                                 case 4:
                                     System.out.println("Testing for Primitive Obession -" + child.getName());
-                                    po.run(child);
+                                    pO2.run(child);
                                     break;
                                 case 5:
                                     System.out.println("Testing for Data Class -" + child.getName());
