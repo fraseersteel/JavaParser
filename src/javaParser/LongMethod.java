@@ -1,58 +1,55 @@
-
 package javaParser;
-
-import java.io.File;
-import java.util.Optional;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.IfStmt;
-import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import java.io.File;
+import java.util.NoSuchElementException;
 
 public class LongMethod {
+
+    static int maxNumberStatements = 10;
 
     public void run(File file) throws Exception {
 
         CompilationUnit cu = JavaParser.parse(file);
+        MethodStatementVisitor msv = new MethodStatementVisitor();
 
-        MethodDeclarationVisitor md = new MethodDeclarationVisitor();
-        cu.accept(md, null);
-
-        if(md.getPassOrFail()==false){
-            System.out.println("All methods passed");
-        }
-
+        cu.accept(msv, null);
     }
 
 
-    private static class MethodDeclarationVisitor extends VoidVisitorAdapter {
+    private static class MethodStatementVisitor extends VoidVisitorAdapter<Void> {
 
-        boolean fail = false;
-        public void visit(MethodDeclaration m, Object arg) {
+        private int numStatements;
 
-            Optional<BlockStmt> block = m.getBody();
-            NodeList<Statement> statements = block.get().getStatements();
+        public void visit(MethodDeclaration n, Void arg) {
+            numStatements = 0;
+            try {
+                visit(n.getBody().get(), arg);
 
-            for(IfStmt child : m.getParentNodeForChildren().getChildNodesByType(IfStmt.class)){
-                statements.add(child);
-                System.out.println();
+                if (numStatements > maxNumberStatements) {
+                    System.out.println("Fail! Method '" + n.getName() + "' has too many statements [" + numStatements + "]");
+                } else {
+                    System.out.println("Pass. Method '" + n.getName() + "' [" + numStatements + "]");
+                }
+            } catch (NoSuchElementException e) {
+                System.out.println("Method " + n.getName() + " contains no body.");
             }
 
-            if (statements.size() > 10) {
-                System.out.println("Error with [" + m.getName() + "] " + "more than 10 statements");
-                fail = true;
-            }
+            super.visit(n, arg);
         }
 
-        boolean getPassOrFail(){
-            return fail;
+        public void visit(BlockStmt n, Void arg) {
+            NodeList<Statement> statements = n.getStatements();
+            numStatements = numStatements + statements.size();
+
+            super.visit(n, arg);
         }
 
     }
 }
-

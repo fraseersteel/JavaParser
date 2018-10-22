@@ -15,8 +15,24 @@ public class LargeClassTest {
          return a;
     }
 
+    public void getNothing(){
+
+    }
+
     public void test(){
         int y = 1;
         System.out.println(helloWorld()*y);
+
+        while(y==1){
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        }
     }
 }

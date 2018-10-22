@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrimitiveObession {
+public class PrimitiveObsession {
 
     public void run(File file) throws Exception {
 
@@ -24,13 +24,13 @@ public class PrimitiveObession {
     }
 
 
-    private static class PrimitiveVisitor extends VoidVisitorAdapter {
+    private static class PrimitiveVisitor extends VoidVisitorAdapter<Void> {
 
         private List<String> primitiveVarName = new ArrayList<>();
         private int primitiveCount = 0;
         private int variableCount = 0;
 
-        public void visit(ClassOrInterfaceDeclaration c, Object arg) {
+        public void visit(ClassOrInterfaceDeclaration c, Void arg) {
 
             for (FieldDeclaration v : c.getFields()) {
                 if (v.getCommonType().isPrimitiveType()) {
@@ -45,10 +45,10 @@ public class PrimitiveObession {
                     variableCount++;
                 }
             }
-            super.visit(c, arg);
+            super.visit(c,arg);
         }
 
-        public void visit(VariableDeclarationExpr vd, Object a) {
+        public void visit(VariableDeclarationExpr vd, Void arg) {
 
             for (VariableDeclarator v : vd.getVariables()) {
                 if (v.getType().isPrimitiveType()) {
@@ -56,7 +56,7 @@ public class PrimitiveObession {
                     primitiveCount++;
                 }
             }
-            super.visit(vd, a);
+            super.visit(vd, arg);
         }
 
         private void calPrimPercentage() {
@@ -71,6 +71,7 @@ public class PrimitiveObession {
                 }
             }else{
                 System.out.println("no primitives");
+                System.out.println(variableCount + " variable count");
             }
         }
     }

@@ -12,6 +12,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class LargeClass {
@@ -23,77 +24,51 @@ public class LargeClass {
 
         cu.accept(lcs, null);
         System.out.println(lcs.getCount() + " statements ");
-        if(lcs.isAcceptable()==false){
+        if (lcs.isAcceptable() == false) {
             System.out.println("FAIL - Too many statements in class" + file.getName());
-        }else{
+        } else {
             System.out.println("PASS");
         }
     }
 
 
-
-    private static class LargeClassStatements extends VoidVisitorAdapter {
+    private static class LargeClassStatements extends VoidVisitorAdapter<Void> {
 
         int count = 0;
 
+        public void visit(ClassOrInterfaceDeclaration m, Void arg) {
 
-        public void visit(ClassOrInterfaceDeclaration c, Object arg) {
-            count = count + c.getFields().size();
-            System.out.println("number of method " + c.getMethods().size());
-            System.out.println("number of fields " + c.getFields().size());
-            System.out.println("number of constructors " + c.getConstructors().size());
+            // fields
+            count+= m.getFields().size();
 
-            //method statements
-            for (MethodDeclaration method : c.getMethods()) {
-                Optional<BlockStmt> mBlock = method.getBody();
-                NodeList<Statement> methStatements = mBlock.get().getStatements();
-//                System.out.println(methStatements);
-                count = count + methStatements.size();
-
-            }
-
-            //constructors
-            for (ConstructorDeclaration con : c.getConstructors()) {
+            // constructors
+            for (ConstructorDeclaration con : m.getConstructors()) {
                 BlockStmt conBlock = con.getBody();
                 NodeList<Statement> conStatements = conBlock.getStatements();
                 count+= conStatements.size();
             }
-
-
-            for(IfStmt child : c.getParentNodeForChildren().getChildNodesByType((IfStmt.class)) ) {
-                count++;
-
-                visit(child, null);
-                if (child.getElseStmt().isPresent()) {
-                    if (child.getElseStmt().get() instanceof IfStmt) {
-                    } else {
-                        count++;
-                        visit(child, null);
-                    }
+            try {
+                for (MethodDeclaration currentMethod : m.getMethods()) {
+                    Optional<BlockStmt> mBlock = currentMethod.getBody();
+                    NodeList<Statement> methStatements = mBlock.get().getStatements();
+                    count = count + methStatements.size();
+                    visit(currentMethod.getBody().get(), arg);
                 }
+            } catch (NoSuchElementException e) {
             }
-
-//            for(ForStmt child : c.getMethodsByName())
-
-
-            for(WhileStmt child : c.getParentNodeForChildren().getChildNodesByType(WhileStmt.class)){
-                System.out.println(child.getCondition() + " condition");
-                ArrayList<Statement> methStatements = new ArrayList<>();
-                methStatements.add(child.getBody());
-                count = count + methStatements.size();
-                count++;
-            }
-
-
         }
 
+        public void visit(BlockStmt blockStmt, Void arg) {
+            NodeList<Statement> statements = blockStmt.getStatements();
+            count = count + statements.size();
+        }
 
         public int getCount() {
             return count;
         }
 
         public boolean isAcceptable() {
-            if (getCount()>= 20) {
+            if (getCount() >= 100) {
                 return false;
             } else {
                 return true;
