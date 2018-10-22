@@ -2,12 +2,16 @@ package javaParser;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import javax.swing.plaf.nimbus.State;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,15 +63,25 @@ public class PrimitiveObsession {
             super.visit(vd, arg);
         }
 
+        public void visit(BlockStmt n, Void arg){
+            NodeList<Statement> statements = n.getStatements();
+            for(int i = 0; i>statements.size();i++){
+                if(statements.get(i).isLocalClassDeclarationStmt()){
+                    variableCount++;
+                }
+            }
+
+        }
+
         private void calPrimPercentage() {
             System.out.println("calculating");
-            if (primitiveCount < 0) {
-                System.out.println("calculating percentage");
+            if (primitiveCount > 0 && variableCount>0) {
+                System.out.println("calculating percentage " + primitiveCount + "/" + variableCount + "*100");
                 float primPercentage = primitiveCount * 100 / variableCount;
-                if (primPercentage <= 70) {
-                    System.out.println("Fail - Focuses on too many primitives");
+                if (primPercentage >= 70) {
+                    System.out.println("Fail - Focuses on too many primitives"  + "[" + primPercentage + "]");
                 } else {
-                    System.out.println("Pass");
+                    System.out.println("Pass" + "[" + primPercentage + "]");
                 }
             }else{
                 System.out.println("no primitives");

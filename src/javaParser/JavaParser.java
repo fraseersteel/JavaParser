@@ -18,13 +18,12 @@ public class JavaParser {
         LongMethod lm = new LongMethod();
         LargeClass lc = new LargeClass();
         PrimitiveObsession po = new PrimitiveObsession();
-        PrimitiveObssession2 pO2 = new PrimitiveObssession2();
         DataClass dc = new DataClass();
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
 
         //**** change file path to chose which directory you would like to work in ****//
-        File dir = new File("src/TestFolder/Dispensibles");
+        File dir = new File("src/TestFolder/FalsePositives");
         if (dir.isDirectory()) {
         while (choice != 9) {
 
@@ -59,7 +58,7 @@ public class JavaParser {
                                     break;
                                 case 4:
                                     System.out.println("Testing for Primitive Obession -" + child.getName());
-                                    pO2.run(child);
+                                    po.run(child);
                                     break;
                                 case 5:
                                     System.out.println("Testing for Data Class -" + child.getName());

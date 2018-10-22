@@ -39,28 +39,29 @@ public class LargeClass {
         public void visit(ClassOrInterfaceDeclaration m, Void arg) {
 
             // fields
-            count+= m.getFields().size();
+            count += m.getFields().size();
 
             // constructors
             for (ConstructorDeclaration con : m.getConstructors()) {
-                BlockStmt conBlock = con.getBody();
-                NodeList<Statement> conStatements = conBlock.getStatements();
-                count+= conStatements.size();
+//                BlockStmt conBlock = con.getBody();
+//                NodeList<Statement> conStatements = conBlock.getStatements();
+//                count+= conStatements.size();
+                visit(con.getBody(), arg);
             }
             try {
                 for (MethodDeclaration currentMethod : m.getMethods()) {
-                    Optional<BlockStmt> mBlock = currentMethod.getBody();
-                    NodeList<Statement> methStatements = mBlock.get().getStatements();
-                    count = count + methStatements.size();
                     visit(currentMethod.getBody().get(), arg);
                 }
             } catch (NoSuchElementException e) {
             }
         }
 
-        public void visit(BlockStmt blockStmt, Void arg) {
-            NodeList<Statement> statements = blockStmt.getStatements();
+
+        public void visit(BlockStmt n, Void arg) {
+            NodeList<Statement> statements = n.getStatements();
             count = count + statements.size();
+
+            super.visit(n, arg);
         }
 
         public int getCount() {
